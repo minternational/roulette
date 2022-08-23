@@ -10,7 +10,7 @@ export default {
 
 <style scoped>
   .spinButton {
-    margin: 4rem auto;
+    margin: 3rem auto;
     font-weight: bold;
     font-size: 1.25rem;
     text-transform: uppercase;

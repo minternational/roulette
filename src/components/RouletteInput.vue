@@ -12,7 +12,7 @@
 
 
     <div class="betField">
-      <label class="type">Red oder Black</label>
+      <label class="type">Red or Black</label>
       <input type="radio" class="radioButton" name="color">
       <label>Red</label>
       <p>
@@ -20,6 +20,7 @@
       </p>
       <input type="radio" class="radioButton" name="color">
       <label>Black</label>
+      <button @click="resetSelection()">Reset Selection</button>
     </div>
 
 
@@ -50,7 +51,7 @@
 
 
     <div class="betField">
-      <label class="type">First Dozen, Second Dozen or Third Dozen</label>
+      <label class="type">First, Second or Third Dozen</label>
       <input type="radio" class="radioButton" name="dozen">
       <label>First Dozen</label>
       <small class="info">1 - 12</small>
@@ -70,7 +71,7 @@
 
 
     <div class="betField">
-      <label class="type">First Column, Second Column or Third Column</label>
+      <label class="type">First, Second or Third Column</label>
       <input type="radio" class="radioButton" name="column">
       <label>First Column</label>
       <small class="info">1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34</small>
@@ -96,7 +97,10 @@
 export default {
   name: "RouletteInput.vue",
   methods: {
-
+    resetSelection() {
+      const getButtonValue = document.getElementsByName('color')
+      getButtonValue.forEach(item => console.log(item))
+    }
   }
 }
 
@@ -108,7 +112,7 @@ export default {
     width: 1250px;
     margin: auto;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr 1fr;
     padding: 10px;
   }
 
@@ -119,6 +123,14 @@ export default {
     padding: 2rem 0;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
+    transition: .3s;
+  }
+
+  .betField:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: .3s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   .inputText {
