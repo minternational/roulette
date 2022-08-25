@@ -1,21 +1,17 @@
 <template>
   <h1>ROULETTE</h1>
   <RouletteInput />
-  <RouletteOutput />
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import RouletteOutput from './components/RouletteOutput.vue'
-import RouletteInput from './components/RouletteInput.vue'
+import RouletteInput from './components/RouletteInput.vue';
 
 export default {
   name: 'App',
   components: {
-    RouletteOutput,
-    RouletteInput
-  }
-}
+    RouletteInput,
+  },
+};
 </script>
 
 <style>
