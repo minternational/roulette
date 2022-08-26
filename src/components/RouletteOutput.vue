@@ -1,19 +1,22 @@
 <template>
   <button @click="textInputValues()" class="spinButton">SPIN THE WHEEL</button>
-  {{ bets }}
+  <span>Bet Amount: <b>{{ betAmount }} €</b></span>
+  <br />
+  <br />
+  <span class="amount">Win Amount: <b>{{ winAmount }} €</b></span>
   <ul v-for="item in randomNumberValues" :key="item">
-    <li>Number: {{ item.number }}</li>
-    <li>Color: {{ item.color }}</li>
-    <li>Is lower number: {{ item.lowerNumber }}</li>
-    <li>Is higher number: {{ item.higherNumber }}</li>
-    <li>First dozen: {{ item.firstDozen }}</li>
-    <li>Second dozen: {{ item.secondDozen }}</li>
-    <li>Third dozen: {{ item.thirdDozen }}</li>
-    <li>Odd: {{ item.odd }}</li>
-    <li>Even: {{ item.even }}</li>
-    <li>First column: {{ item.firstColumn }}</li>
-    <li>Second column: {{ item.secondColumn }}</li>
-    <li>Third column: {{ item.thirdColumn }}</li>
+    <li>Number: <b>{{ item.number }}</b></li>
+    <li>Color: <b>{{ item.color }}</b></li>
+    <li v-if="item.lowerNumber">Is a lower number</li>
+    <li v-if="item.higherNumber">Is a higher number</li>
+    <li v-if="item.firstDozen">Belongs to the first dozen</li>
+    <li v-if="item.secondDozen">Belongs to the second dozen</li>
+    <li v-if="item.thirdDozen">Belongs to the third dozen</li>
+    <li v-if="item.odd">Is Odd</li>
+    <li v-if="item.even">Is Even</li>
+    <li v-if="item.firstColumn">Belongs to the first column</li>
+    <li v-if="item.secondColumn">Belongs to the second column</li>
+    <li v-if="item.thirdColumn">Belongs to the third column</li>
   </ul>
 </template>
 
@@ -25,21 +28,7 @@ export default {
   data() {
     return {
       randomNumberValues: [],
-      foo: [],
-      /*{*/
-      /*         number: null,
-        color: null,
-        lowerNumber: null,
-        higherNumber: null,
-        firstDozen: null,
-        secondDozen: null,
-        thirdDozen: null,
-        odd: null,
-        even: null,
-        firstColumn: null,
-        secondColumn: null,
-        thirdColumn: null, */
-      /* }, */
+      winAmount: 0,
     };
   },
   props: {
@@ -48,10 +37,16 @@ export default {
       required: false,
       default: () => [],
     },
+    betAmount: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
   },
   methods: {
     textInputValues() {
-      this.randomNumberValues = [];
+      this.randomNumberValues = []
+      this. winAmount = 0;
 
       const pickRandomNumberValue = Math.floor(Math.random() * numbers.length);
 
@@ -59,42 +54,43 @@ export default {
       this.checkForWin(numbers[pickRandomNumberValue]);
     },
     checkForWin(pickedValues) {
+
       this.bets.forEach((item) => {
         if (pickedValues.number === item) {
-          console.log('NUMBER IST GLEICH');
+          this.winAmount = this.betAmount * 35
         }
         if (pickedValues.color === item) {
-          console.log('FARBE IST GLEICH');
+          this.winAmount = this.betAmount
         }
-        if (pickedValues.lowerNumber === item) {
-          console.log('LOWER NUMBER IST GLEICH');
+        if (pickedValues.lowerNumber && item === 'lowerNumber') {
+          this.winAmount = this.betAmount
         }
-        if (pickedValues.higherNumber === item) {
-          console.log('HIGHER NUMBER IST GLEICH');
+        if (pickedValues.higherNumber && item === 'higherNumber') {
+          this.winAmount = this.betAmount
         }
-        if (pickedValues.firstDozen === item) {
-          console.log('FIRST DOZEN IST GLEICH');
+        if (pickedValues.firstDozen && item === 'firstDozen') {
+          this.winAmount = this.betAmount * 2
         }
-        if (pickedValues.secondDozen === item) {
-          console.log('SECOND DOZEN IST GLEICH');
+        if (pickedValues.secondDozen && item === 'secondDozen') {
+          this.winAmount = this.betAmount * 2
         }
-        if (pickedValues.thirdDozen === item) {
-          console.log('THIRD DOZEN IST GLEICH');
+        if (pickedValues.thirdDozen && item === 'thirdDozen') {
+          this.winAmount = this.betAmount * 2
         }
-        if (pickedValues.odd === item) {
-          console.log('ODD IST GLEICH');
+        if (pickedValues.odd && item === 'odd') {
+          this.winAmount = this.betAmount
         }
-        if (pickedValues.even === item) {
-          console.log('EVEN IST GLEICH');
+        if (pickedValues.even && item === 'even') {
+          this.winAmount = this.betAmount
         }
-        if (pickedValues.firstColumn === item) {
-          console.log('FIRST COLUMN IST GLEICH');
+        if (pickedValues.firstColumn && item === 'firstColumn') {
+          this.winAmount = this.betAmount * 2
         }
-        if (pickedValues.secondColumn === item) {
-          console.log('SECOND COLUMN IST GLEICH');
+        if (pickedValues.secondColumn && item === 'secondColumn') {
+          this.winAmount = this.betAmount * 2
         }
-        if (pickedValues.thirdColumn === item) {
-          console.log('THIRD COLUM IST GLEICH');
+        if (pickedValues.thirdColumn && item === 'thirdColumn') {
+          this.winAmount = this.betAmount * 2
         }
       });
     },
@@ -127,5 +123,9 @@ export default {
 
 li {
   list-style-type: none;
+}
+
+.amount {
+  padding-bottom: 4rem;
 }
 </style>

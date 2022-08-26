@@ -1,6 +1,17 @@
 <template>
   <div class="grid-container">
     <div class="betField">
+      <label class="type">Bet Amount</label>
+      <div class="inputWrapper">
+        <input
+            type="number"
+            class="inputText"
+            id="number"
+            v-model="betAmount"
+        /> €
+      </div>
+    </div>
+    <div class="betField">
       <label class="type">Number</label>
       <div class="inputWrapper">
         <input
@@ -171,7 +182,7 @@
       </div>
     </div>
   </div>
-  <RouletteOutput :bets="checkedBetValues" />
+  <RouletteOutput :bets="checkedBetValues" :bet-amount="betAmount" />
 </template>
 
 <script>
@@ -184,6 +195,7 @@ export default {
     return {
       checkedBetValues: [],
       betNumbersValues: '',
+      betAmount: 0,
     };
   },
   methods: {
@@ -198,14 +210,13 @@ export default {
 
 <style scoped>
 .grid-container {
-  max-width: 950px;
   display: grid;
   grid-template-columns: auto auto;
+  grid-gap: 24px;
 }
 
 .betField {
   width: 475px;
-  margin: 1rem;
   padding: 1rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
@@ -223,6 +234,7 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0.25);
   padding: 0.5rem;
   border-radius: 5px;
+  text-align: center;
 }
 
 .type {

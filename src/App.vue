@@ -1,6 +1,8 @@
 <template>
-  <h1>ROULETTE</h1>
-  <RouletteInput />
+  <div class="appWrapper">
+    <h1>ROULETTE</h1>
+    <RouletteInput />
+  </div>
 </template>
 
 <script>
@@ -22,5 +24,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.appWrapper {
+  width: 1000px;
+  margin: 0 auto;
 }
 </style>
